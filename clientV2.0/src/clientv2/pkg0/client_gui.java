@@ -17,6 +17,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 //imports for email
 import java.util.Properties;
+import java.util.Random;
 import javax.mail.Authenticator;
 import javax.mail.MessagingException;
 import javax.mail.Message;
@@ -25,6 +26,7 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.PasswordAuthentication;
+// Imports for the callender
 
 /**
  *
@@ -126,51 +128,44 @@ public class client_gui extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(tfSend, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(BtnSend))
+                        .addComponent(BtnSend)
+                        .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(26, 26, 26)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addGap(51, 51, 51))
+                                        .addGap(171, 171, 171)
+                                        .addComponent(jLabel2))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING))
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(39, 39, 39)
-                                                .addComponent(jLabel2)
-                                                .addGap(0, 0, Short.MAX_VALUE))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
-                                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                        .addGap(106, 106, 106)
+                                        .addComponent(jLabel5)))
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(10, 10, 10)
-                                                .addComponent(jLabel4))
-                                            .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel3)
+                                            .addComponent(jLabel1))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel4)
+                                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
+                                        .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                                         .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(90, 90, 90)
-                                        .addComponent(jButton1))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(28, 28, 28)
-                                        .addComponent(jLabel5))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(28, 28, 28)
-                                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(61, 61, 61))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton1)
+                                .addGap(107, 107, 107))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -178,7 +173,7 @@ public class client_gui extends javax.swing.JFrame {
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2))
@@ -187,16 +182,16 @@ public class client_gui extends javax.swing.JFrame {
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel3)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(17, 17, 17)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jButton1)))
@@ -215,10 +210,62 @@ public class client_gui extends javax.swing.JFrame {
     private void tfSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfSendActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfSendActionPerformed
+ StringBuffer  toHide; //initialize the string buffer to encrypt
+     
+     Random random1;
+     static int privateKey = 123456789;     //This is a private key generated from the user's number
+     static int publicKey;
+     
+    public String Encrypt(String text){
+         this.random1 = new Random((privateKey)); //Takes the private key as a seed and generate a new random number.
+        publicKey = random1.nextInt(privateKey); //The public key is then created with the random number
+        System.out.println("public key is:" +publicKey);
+        
+        
+       
+        
+        this.toHide  = new StringBuffer(text); //could have input  for original
+        System.out.println("original"+ "  "+toHide);
 
+        for (int i = 0; i<toHide.length(); i++)
+        {
+            int temp = 0;
+            temp = (int) toHide.charAt(i);
+            temp = (temp +  publicKey); //scrambles the string with the public key
+            toHide.setCharAt(i, (char)temp); //overwrites the original message
+
+        }
+
+        System.out.println("encrypted" +"  " + toHide);
+        String hide =String.valueOf(toHide);
+        System.out.println("encrypted" +"  " + hide);
+        return hide;
+        
+    }
+     
+      public static String Decrypt(String hide){
+        StringBuffer unhide= new StringBuffer(hide);
+          for (int i = 0; i<unhide.length(); i++)
+        {
+            int temp = 0;
+            temp = (int) unhide.charAt(i);
+            temp = temp - publicKey; //inverse of the scramble to get the plain text
+            unhide.setCharAt(i, (char)temp);
+        }
+        System.out.println("After decryption: " + " " + unhide);
+        String hiden = String.valueOf(unhide);
+        return hiden;
+    }
+     
+      public String messageToBeSent()
+    {
+        String COnvertPublic = publicKey+"";
+        String Sender = COnvertPublic+toHide;
+        return Sender;
+    }
     private void BtnSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSendActionPerformed
         try{
-            //BufferedReader keyRead = new BufferedReader(new InputStreamReader(System.in));
+             //BufferedReader keyRead = new BufferedReader(new InputStreamReader(System.in));
             OutputStream ostream = client_gui.clientSock.getOutputStream();
             String sendMessage;
             String formattedtext;
@@ -227,8 +274,8 @@ public class client_gui extends javax.swing.JFrame {
             //sendMessage=keyRead.readLine();//keyboard reading
             sendMessage = tfSend.getText();
             String adress = String.valueOf(JOptionPane.showInputDialog(null,"Who do u want to send the message to"));
-            formattedtext="T#"+adress+"#"+sendMessage;
-            pwrite.println(formattedtext);//sending to server
+             formattedtext="T#"+adress+"#"+(Encrypt(sendMessage));
+           pwrite.println(formattedtext);//sending to server
              client_gui.TaChat.append("me:>"+sendMessage+"\n");
             System.out.flush();
         }catch(IOException e){
@@ -261,7 +308,7 @@ public class client_gui extends javax.swing.JFrame {
            client_gui.sendEmail(to, subject, messageText, from, user, pass);
     }//GEN-LAST:event_jButton1ActionPerformed
     
-    /*If it doesen work wit your email you must allow less secure apps ON follow this link: 
+    /*If it doesen work wiht your email you must allow less secure apps ON follow this link: 
     https://myaccount.google.com/lesssecureapps */
     
     public static void sendEmail(String to, String subject, String msg,
@@ -378,7 +425,8 @@ Thread runner;
             if((receiveMessage=receiveRead.readLine())!=null)//receive from server
             {
                 System.out.println("server:>"+receiveMessage);//displaying message
-                client_gui.TaChat.append("server:>"+receiveMessage+"\n");
+                    String text = client_gui.Decrypt(receiveMessage);
+                client_gui.TaChat.append("server:>"+(text)+"\n");
             }
            
         }
@@ -390,3 +438,5 @@ Thread runner;
 }
     
 }
+
+
