@@ -7,10 +7,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="286.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="clientv2.pkg0.Sign_UpController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="286.0" style="-fx-background-color: #d3d3e8;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientv2.pkg0.Sign_UpController">
    <children>
-      <Button fx:id="btnSignUp" layoutX="72.0" layoutY="322.0" mnemonicParsing="false" onAction="#buttonSignUpEvent" prefHeight="25.0" prefWidth="145.0" text="Sig In" />
+      <Button fx:id="btnSignUp" layoutX="72.0" layoutY="322.0" mnemonicParsing="false" onAction="#buttonSignUpEvent" prefHeight="25.0" prefWidth="145.0" style="-fx-background-color: #bcb1cc;" text="Sig In" />
       <Label layoutX="94.0" layoutY="135.0" text="Sign In">
          <font>
             <Font size="33.0" />

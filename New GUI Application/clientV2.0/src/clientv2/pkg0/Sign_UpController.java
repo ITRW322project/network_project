@@ -5,9 +5,17 @@
  */
 package clientv2.pkg0;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -22,6 +30,20 @@ public class Sign_UpController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }   
+    
+    private Button btnSignUp; 
+    @FXML
+    private void buttonSignUpEvent(ActionEvent event) throws IOException{
+        Stage stage = new Stage(); 
+        Parent root = null;
+            
+            root = FXMLLoader.load(getClass().getResource("Main_Interface.fxml"));
+        
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+        
+    }
     
 }
