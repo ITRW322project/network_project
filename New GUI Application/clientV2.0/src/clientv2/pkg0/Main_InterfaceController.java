@@ -5,6 +5,7 @@
  */
 package clientv2.pkg0;
 
+import java.io.File;
 import java.io.IOException;
 import javafx.scene.input.MouseEvent;
 import java.net.URL;
@@ -16,6 +17,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 /**
@@ -33,8 +35,15 @@ public class Main_InterfaceController implements Initializable {
     }
     
     @FXML
-    private void handleAttachmentAction(MouseEvent event) {
-        System.out.println("You clicked me!");
+    public void handleAttachmentAction(MouseEvent event) {
+        FileChooser fc = new FileChooser();
+        File selectedFile = fc.showOpenDialog(null);
+        
+        if(selectedFile != null){
+            System.out.println(selectedFile.getName());
+        } else {
+            System.out.println("File not valid");
+        }
     }
     
     @FXML
