@@ -19,24 +19,29 @@
       <TextArea editable="false" layoutX="4.0" layoutY="56.0" prefHeight="294.0" prefWidth="548.0" />
       <ImageView fx:id="attachmentImage" fitHeight="34.0" fitWidth="34.0" layoutX="498.0" layoutY="15.0" onMouseClicked="#handleAttachmentAction" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="file:/C:/Users/beste/Pictures/Camera%20Roll/149827.png" />
+            <Image url="file:/C:/Users/beste/Documents/322%20Repo/network_project/New%20GUI%20Application/clientV2.0/src/Images/149827.png" />
          </image>
       </ImageView>
       <ImageView fx:id="emailImage" fitHeight="30.0" fitWidth="41.0" layoutX="446.0" layoutY="17.0" onMouseClicked="#handleEmailAction" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="file:/C:/Users/beste/Pictures/Camera%20Roll/78200f2f-c295-4bb1-9cae-48f8422b5aed.png" />
+            <Image url="file:/C:/Users/beste/Documents/322%20Repo/network_project/New%20GUI%20Application/clientV2.0/src/Images/78200f2f-c295-4bb1-9cae-48f8422b5aed.png" />
          </image>
       </ImageView>
       <ImageView fx:id="calendarImage" fitHeight="40.0" fitWidth="41.0" layoutX="402.0" layoutY="12.0" onMouseClicked="#handleCalendarAction" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="file:/C:/Users/beste/Pictures/Camera%20Roll/calendar.png" />
+            <Image url="@../../Images/calendar.png" />
          </image>
       </ImageView>
-      <Label layoutX="61.0" layoutY="12.0" text="Jennifer">
+      <Label layoutX="61.0" layoutY="2.0" text="Jennifer">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Label layoutX="61.0" layoutY="38.0" text="jennifer@gmail.com" />
+      <Label layoutX="61.0" layoutY="32.0" text="jennifer@gmail.com" />
+      <ImageView fx:id="calendarImage1" fitHeight="51.0" fitWidth="49.0" layoutX="4.0" layoutY="3.0" onMouseClicked="#handleCalendarAction" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../Images/322_Logo.jpg" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
