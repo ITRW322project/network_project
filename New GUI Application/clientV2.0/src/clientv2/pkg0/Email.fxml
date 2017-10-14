@@ -7,13 +7,12 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="375.0" prefWidth="600.0" style="-fx-background-color: #d3d3e8;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="clientv2.pkg0.EmailController">
+<AnchorPane id="AnchorPane" prefHeight="375.0" prefWidth="600.0" style="-fx-background-color: #d3d3e8;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientv2.pkg0.EmailController">
    <children>
-      <TextField layoutX="5.0" layoutY="36.0" prefHeight="30.0" prefWidth="590.0" promptText="TO:" />
-      <TextField layoutX="5.0" layoutY="66.0" prefHeight="30.0" prefWidth="590.0" promptText="SUBJECT:" />
-      <TextArea layoutX="5.0" layoutY="96.0" prefHeight="240.0" prefWidth="590.0" promptText="Enter Text Here..." />
-      <Button layoutX="477.0" layoutY="342.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="118.0" style="-fx-background-color: #bcb1cc;" text="Send" />
+      <TextField fx:id="txtTo" layoutX="5.0" layoutY="36.0" prefHeight="30.0" prefWidth="590.0" promptText="TO:" />
+      <TextField fx:id="txtSubject" layoutX="5.0" layoutY="66.0" prefHeight="30.0" prefWidth="590.0" promptText="SUBJECT:" />
+      <TextArea fx:id="txtMessage" layoutX="5.0" layoutY="96.0" prefHeight="240.0" prefWidth="590.0" promptText="Enter Text Here..." />
+      <Button fx:id="btnSend" layoutX="477.0" layoutY="342.0" mnemonicParsing="false" onAction="#handleSendAction" prefHeight="25.0" prefWidth="118.0" style="-fx-background-color: #bcb1cc;" text="Send" />
       <Label layoutX="273.0" layoutY="2.0" text="Email">
          <font>
             <Font size="23.0" />

@@ -15,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 /**
@@ -35,15 +36,14 @@ public class Sign_UpController implements Initializable {
     private Button btnSignUp; 
     @FXML
     private void buttonSignUpEvent(ActionEvent event) throws IOException{
-        Stage stage = new Stage(); 
+        Stage stage = new Stage();
         Parent root = null;
             
-            root = FXMLLoader.load(getClass().getResource("Main_Interface.fxml"));
+        root = FXMLLoader.load(getClass().getResource("Main_Interface.fxml"));
         
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
         
     }
-    
 }
