@@ -16,7 +16,7 @@
    <children>
       <TextField layoutX="7.0" layoutY="357.0" prefHeight="34.0" prefWidth="435.0" />
       <Button defaultButton="true" layoutX="446.0" layoutY="357.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="34.0" prefWidth="103.0" style="-fx-background-color: #bcb1cc;" text="send" textAlignment="CENTER" textOverrun="CLIP" />
-      <TextArea editable="false" layoutX="4.0" layoutY="56.0" prefHeight="294.0" prefWidth="548.0" />
+      <TextArea id="TaChat" editable="false" layoutX="4.0" layoutY="56.0" prefHeight="294.0" prefWidth="548.0" />
       <ImageView fx:id="attachmentImage" fitHeight="34.0" fitWidth="34.0" layoutX="498.0" layoutY="15.0" onMouseClicked="#handleAttachmentAction" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../Images/149827.png" />
