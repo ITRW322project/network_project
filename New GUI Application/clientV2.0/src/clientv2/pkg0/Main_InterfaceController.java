@@ -99,7 +99,7 @@ public class Main_InterfaceController implements Initializable {
             OutputStream os = client_gui.clientSock.getOutputStream();
             OutputStreamWriter osw = new OutputStreamWriter(os);
             BufferedWriter bw = new BufferedWriter(osw);
-            bw.write(imageString);
+            bw.write(formattedtext);
             bw.flush();
             
             pwrite.println(formattedtext);

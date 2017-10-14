@@ -62,46 +62,6 @@ public class ClientV20 extends Application {
         launch(args);
     }
     
-    public String Encrypt(String text){
-        this.random1 = new Random((privateKey)); //Takes the private key as a seed and generate a new random number.
-        publicKey = random1.nextInt(privateKey); //The public key is then created with the random number
-        System.out.println("public key is:" +publicKey);   
-        this.toHide  = new StringBuffer(text); //could have input  for original
-        System.out.println("original"+ "  "+toHide);
-        for (int i = 0; i<toHide.length(); i++)
-        {
-            int temp = 0;
-            temp = (int) toHide.charAt(i);
-            temp = (temp +  publicKey); //scrambles the string with the public key
-            toHide.setCharAt(i, (char)temp); //overwrites the original message
-        }
-        System.out.println("encrypted" +"  " + toHide);
-        String hide =String.valueOf(toHide);
-        System.out.println("encrypted" +"  " + hide);
-        return hide;       
-    }
-    
-    public static String Decrypt(String hide){
-        StringBuffer unhide= new StringBuffer(hide);
-        for (int i = 0; i<unhide.length(); i++)
-        {
-            int temp = 0;
-            temp = (int) unhide.charAt(i);
-            temp = temp - publicKey; //inverse of the scramble to get the plain text
-            unhide.setCharAt(i, (char)temp);
-        }
-        System.out.println("After decryption: " + " " + unhide);
-        String hiden = String.valueOf(unhide);
-        return hiden;
-    }
-    
-    public String messageToBeSent()
-    {
-        String COnvertPublic = publicKey+"";
-        String Sender = COnvertPublic+toHide;
-        return Sender;
-    }
-    
     class listenings implements Runnable{
     Thread runner;
     listenings(){
