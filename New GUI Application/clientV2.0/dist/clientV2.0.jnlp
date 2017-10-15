@@ -16,6 +16,7 @@
     <jar href="lib\commons-codec-1.10-tests.jar" size="256617" download="eager" />
     <jar href="lib\commons-codec-1.10.jar" size="284184" download="eager" />
     <jar href="lib\javax.mail-1.6.0.jar" size="653275" download="eager" />
+    <jar href="lib\jfoenix.jar" size="2384520" download="eager" />
   </resources>
   <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="clientV2.0" >
     <param name="requiredFXVersion" value="8.0+"/>

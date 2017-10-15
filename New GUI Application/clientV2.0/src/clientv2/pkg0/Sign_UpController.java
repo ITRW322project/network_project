@@ -5,6 +5,7 @@
  */
 package clientv2.pkg0;
 
+import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -27,8 +28,8 @@ import javafx.stage.Window;
  * @author beste
  */
 public class Sign_UpController implements Initializable {
-    @FXML private TextField txtEmail;
-    @FXML private TextField txtPassword;
+    @FXML private JFXTextField txtEmail;
+    @FXML private JFXTextField txtPassword;
     /**
      * Initializes the controller class.
      */

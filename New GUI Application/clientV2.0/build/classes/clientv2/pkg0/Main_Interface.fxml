@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.effect.*?>
@@ -43,5 +44,6 @@
             <Image url="@../../Images/322_Logo.jpg" />
          </image>
       </ImageView>
+      <JFXTextArea fx:id="recMessage" focusColor="#546dcc" layoutX="6.0" layoutY="58.0" prefHeight="289.0" prefWidth="539.0" style="-fx-background-color: #ffffff;" />
    </children>
 </AnchorPane>

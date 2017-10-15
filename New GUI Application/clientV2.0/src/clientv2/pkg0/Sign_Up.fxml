@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
+<?import javafx.scene.paint.*?>
+<?import com.jfoenix.controls.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
@@ -10,8 +13,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="286.0" style="-fx-background-color: #d3d3e8;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientv2.pkg0.Sign_UpController">
    <children>
-      <Button fx:id="btnSignUp" layoutX="72.0" layoutY="322.0" mnemonicParsing="false" onAction="#buttonSignUpEvent" prefHeight="25.0" prefWidth="145.0" style="-fx-background-color: #bcb1cc;" text="Sig In" />
-      <Label layoutX="94.0" layoutY="135.0" text="Sign In">
+      <Label layoutX="91.0" layoutY="78.0" text="Sign In">
          <font>
             <Font size="33.0" />
          </font>

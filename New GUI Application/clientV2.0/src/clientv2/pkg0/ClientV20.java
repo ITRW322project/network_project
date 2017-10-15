@@ -33,6 +33,8 @@ import javafx.scene.input.MouseEvent;
  */
 public class ClientV20 extends Application {
     
+    public static Socket clientSock;
+    
     StringBuffer  toHide; //initialize the string buffer to encrypt   
     Random random1;
     static int privateKey = 123456789;     //This is a private key generated from the user's number
@@ -46,7 +48,7 @@ public class ClientV20 extends Application {
         try {
             clientSock = new Socket("169.1.39.136", 16000);
            //TaChat.append("Client connected to server\n");
-           clientv2.pkg0.listenings listenings = new clientv2.pkg0.listenings();
+           listenings listenings = new listenings();
         } catch (IOException ex) {
             Logger.getLogger(client_gui.class.getName()).log(Level.SEVERE, null, ex);
         } 
@@ -69,16 +71,18 @@ public class ClientV20 extends Application {
             runner = new Thread(this);
             runner.start();
         }
+        
+        
     }
      
     public void run(){
         try{   
             // Communication stream assosiated with socket      
-            InputStream istream=client_gui.clientSock.getInputStream();
+            InputStream istream=clientSock.getInputStream();
             //receiving from server(receiveRead object)
             BufferedReader receiveRead=new BufferedReader(new InputStreamReader(istream));
             System.out.println("to Start the chat, type message and press Enter key");
-            client_gui.TaChat.append("to Start the chat, type message and press Enter key\n");
+            Main_InterfaceController.recMessage.appendText("to Start the chat, type message and press Enter key\n");
          
             String receiveMessage ;    
             while(true)
@@ -86,8 +90,8 @@ public class ClientV20 extends Application {
                 if((receiveMessage=receiveRead.readLine())!=null)//receive from server
                 {
                     System.out.println("server:>"+receiveMessage);//displaying message
-                    String text = client_gui.Decrypt(receiveMessage);
-                    client_gui.TaChat.append("server:>"+(text)+"\n");
+                    String text = Main_InterfaceController.Decrypt(receiveMessage);
+                    Main_InterfaceController.recMessage.appendText("server:>"+(text)+"\n");
                 }          
             }
         }catch(Exception e){
