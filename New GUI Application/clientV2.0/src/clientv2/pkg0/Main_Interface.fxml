@@ -15,7 +15,7 @@
 <AnchorPane id="AnchorPane" prefHeight="397.0" prefWidth="556.0" style="-fx-background-color: #d3d3e8;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientv2.pkg0.Main_InterfaceController">
    <children>
       <TextField layoutX="7.0" layoutY="357.0" prefHeight="34.0" prefWidth="435.0" />
-      <Button defaultButton="true" layoutX="446.0" layoutY="357.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="34.0" prefWidth="103.0" style="-fx-background-color: #bcb1cc;" text="send" textAlignment="CENTER" textOverrun="CLIP" />
+      <Button defaultButton="true" layoutX="446.0" layoutY="357.0" mnemonicParsing="false" onAction="#handleButtonActionMain" prefHeight="34.0" prefWidth="103.0" style="-fx-background-color: #bcb1cc;" text="send" textAlignment="CENTER" textOverrun="CLIP" />
       <TextArea id="TaChat" editable="false" layoutX="4.0" layoutY="56.0" prefHeight="294.0" prefWidth="548.0" />
       <ImageView fx:id="attachmentImage" fitHeight="34.0" fitWidth="34.0" layoutX="498.0" layoutY="15.0" onMouseClicked="#handleAttachmentAction" pickOnBounds="true" preserveRatio="true">
          <image>

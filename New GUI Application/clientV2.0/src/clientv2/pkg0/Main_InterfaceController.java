@@ -57,8 +57,15 @@ public class Main_InterfaceController implements Initializable {
     static int publicKey;
     
     @FXML
-    private void handleButtonAction(ActionEvent event) {
-        System.out.println("You clicked me!");
+    public void handleButtonActionMain(ActionEvent event) throws IOException {
+        Stage stage = new Stage(); 
+        Parent root;
+            
+        root = FXMLLoader.load(getClass().getResource("Contacts.fxml"));
+        
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
     
     @FXML
@@ -107,7 +114,7 @@ public class Main_InterfaceController implements Initializable {
             System.out.flush();
         }catch(IOException e){
 
-        }    
+        } 
     }
     
     @FXML
