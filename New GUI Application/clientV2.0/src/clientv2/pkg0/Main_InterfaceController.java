@@ -115,6 +115,17 @@ public class Main_InterfaceController implements Initializable {
         }catch(IOException e){
 
         } 
+        
+        //Uncomment the code beneath when you have moved the above code to the Attachments_SectionController.java file
+        
+        /*Stage stage = new Stage(); 
+        Parent root;
+            
+        root = FXMLLoader.load(getClass().getResource("Attachments_Selection.fxml"));
+        
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();*/
     }
     
     @FXML
