@@ -38,7 +38,7 @@
          </font>
       </Label>
       <Label layoutX="61.0" layoutY="32.0" text="jennifer@gmail.com" />
-      <ImageView fx:id="calendarImage1" fitHeight="51.0" fitWidth="49.0" layoutX="4.0" layoutY="3.0" onMouseClicked="#handleCalendarAction" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgLogo" fitHeight="51.0" fitWidth="49.0" layoutX="4.0" layoutY="3.0" onMouseClicked="#handleCalendarAction" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../Images/322_Logo.jpg" />
          </image>
