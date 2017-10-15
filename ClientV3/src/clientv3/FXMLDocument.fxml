@@ -13,10 +13,10 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="472.0" prefWidth="675.0" style="-fx-background-color: #d3d3e8;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientv3.FXMLDocumentController">
+<AnchorPane id="AnchorPane" prefHeight="472.0" prefWidth="675.0" style="-fx-background-color: #9aa2b7;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientv3.FXMLDocumentController">
    <children>
       <JFXTextField fx:id="messageToSend" layoutX="245.0" layoutY="417.0" prefHeight="34.0" prefWidth="303.0" promptText="Type message here..." style="-fx-background-color: #ffffff;" unFocusColor="#6b6a86" />
-      <JFXButton fx:id="btnSend" buttonType="RAISED" defaultButton="true" layoutX="561.0" layoutY="417.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="34.0" prefWidth="103.0" ripplerFill="#4659b8" style="-fx-background-color: #6e89da;" text="Send" textAlignment="CENTER" textOverrun="CLIP">
+      <JFXButton fx:id="btnSend" buttonType="RAISED" defaultButton="true" layoutX="561.0" layoutY="417.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="34.0" prefWidth="103.0" ripplerFill="#4659b8" style="-fx-background-color: #6284e4;" text="Send" textAlignment="CENTER" textOverrun="CLIP">
          <font>
             <Font size="14.0" />
          </font>
@@ -36,10 +36,10 @@
             <Image url="@../Images/calendar.png" />
          </image>
       </ImageView>
-      <JFXButton fx:id="btnLogIn" buttonType="RAISED" layoutX="353.0" layoutY="22.0" prefHeight="25.0" prefWidth="125.0" style="-fx-background-color: #6e89da;" text="Log In" onMouseClicked="#handleLoginAction" />
-      <JFXButton fx:id="btnLogOff" buttonType="RAISED" disable="true" layoutX="353.0" layoutY="53.0" prefHeight="25.0" prefWidth="125.0" style="-fx-background-color: #6e89da;" text="Log Off" onMouseClicked="#handleLogOutAction"/>
-      <JFXTextField fx:id="txtUsername" layoutX="176.0" layoutY="19.0" prefHeight="25.0" prefWidth="118.0" style="-fx-background-color: #ffffff;" />
-      <JFXTextField fx:id="txtPassword" layoutX="176.0" layoutY="53.0" prefHeight="25.0" prefWidth="118.0" style="-fx-background-color: #ffffff;" />
+      <JFXButton fx:id="btnLogIn" buttonType="RAISED" layoutX="353.0" layoutY="22.0" onMouseClicked="#handleLoginAction" prefHeight="25.0" prefWidth="125.0" style="-fx-background-color: #6284e4;" text="Log In" />
+      <JFXButton fx:id="btnLogOff" buttonType="RAISED" disable="true" layoutX="353.0" layoutY="53.0" onMouseClicked="#handleLogOutAction" prefHeight="25.0" prefWidth="125.0" style="-fx-background-color: #6284e4;" text="Log Off" />
+      <JFXTextField fx:id="txtUsername" focusColor="#9aa2b7c4" layoutX="176.0" layoutY="19.0" prefHeight="25.0" prefWidth="159.0" style="-fx-background-color: #ffffff;" />
+      <JFXPasswordField fx:id="txtPassword" layoutX="176.0" layoutY="53.0" prefHeight="25.0" prefWidth="159.0" style="-fx-background-color: #ffffff;" />
       <Label fx:id="lblUsers" layoutX="113.0" layoutY="26.0" text="Username:" />
       <Label fx:id="lblPassword" layoutX="115.0" layoutY="57.0" text="Password:" />
       <ImageView fitHeight="71.0" fitWidth="79.0" layoutX="14.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
@@ -49,9 +49,9 @@
       </ImageView>
       <TitledPane animated="false" layoutX="14.0" layoutY="89.0" prefHeight="369.0" prefWidth="221.0" text="Users">
         <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="326.0" prefWidth="219.0" style="-fx-background-color: #6e89da;">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="326.0" prefWidth="219.0" style="-fx-background-color: #6284e4;">
                <children>
-                  <JFXListView fx:id="listUsers" layoutX="6.0" layoutY="-8.0" prefHeight="344.0" prefWidth="206.0" />
+                  <JFXListView fx:id="listUsers" layoutX="6.0" layoutY="-2.0" prefHeight="338.0" prefWidth="206.0" />
                </children>
             </AnchorPane>
         </content>
