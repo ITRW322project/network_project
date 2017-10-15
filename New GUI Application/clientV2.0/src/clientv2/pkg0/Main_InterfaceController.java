@@ -5,6 +5,7 @@
  */
 package clientv2.pkg0;
 
+
 import static clientv2.pkg0.ContactsController.privateKey;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
@@ -45,13 +46,10 @@ public class Main_InterfaceController extends ClientV20  implements Initializabl
     @FXML 
     public  JFXTextField messageToSend;
     @FXML
-    public static JFXTextArea recMessage;
+    public  JFXTextArea recMessage;
     
     public static String imageString;
-    
-    private ObjectInputStream input;
-    private ObjectOutputStream output;
-    private Socket socket;
+    public static String videoString;
     
     StringBuffer  toHide; //initialize the string buffer to encrypt   
     Random random1;
@@ -111,7 +109,7 @@ public class Main_InterfaceController extends ClientV20  implements Initializabl
             
             pwrite.println(formattedtext);
             System.out.println("me:>"+sendMessage+"\n");
-          //  recMessage.appendText("me:>"+sendMessage+"\n");
+            recMessage.appendText("me:>"+sendMessage+"\n");
             System.out.flush();
         }catch(IOException e)
         {
@@ -122,38 +120,17 @@ public class Main_InterfaceController extends ClientV20  implements Initializabl
     
     @FXML
     public void handleAttachmentAction(MouseEvent event) throws FileNotFoundException, IOException {
-        FileChooser fc = new FileChooser();
-        File selectedFile = fc.showOpenDialog(null);
-        
-        if(selectedFile != null){
-            System.out.println(selectedFile.getName());
-        } else {
-            System.out.println("File not valid");
-        }
-        
-        try
-        {
-            FileInputStream fis = new FileInputStream(selectedFile);
-            byte byteArray[] = new byte[(int)selectedFile.length()];
-            fis.read(byteArray);
-            imageString = Base64.encodeBase64String(byteArray);
-
-            System.out.print(imageString);
-        }catch(NullPointerException e)
-        {
-            System.out.print(e);
-        }
         
         //Uncomment the code beneath when you have moved the above code to the Attachments_SectionController.java file
         
-        /*Stage stage = new Stage(); 
+        Stage stage = new Stage(); 
         Parent root;
             
         root = FXMLLoader.load(getClass().getResource("Attachments_Selection.fxml"));
         
         Scene scene = new Scene(root);
         stage.setScene(scene);
-        stage.show();*/
+        stage.show();
     }
     
      public static String Decrypt(String hide){

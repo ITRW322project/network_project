@@ -6,7 +6,6 @@
 package clientv2.pkg0;
 
 import static clientv2.pkg0.Main_InterfaceController.privateKey;
-import static clientv2.pkg0.Main_InterfaceController.recMessage;
 import java.awt.event.ActionEvent;
 import java.io.BufferedWriter;
 import java.io.IOException;

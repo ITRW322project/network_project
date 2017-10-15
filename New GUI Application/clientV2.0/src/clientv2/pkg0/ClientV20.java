@@ -8,6 +8,8 @@ package clientv2.pkg0;
 //Connect to the servre imports
 import static clientv2.pkg0.client_gui.TaChat;
 import static clientv2.pkg0.client_gui.clientSock;
+import com.jfoenix.controls.JFXTextArea;
+import com.jfoenix.controls.JFXTextField;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -34,8 +36,6 @@ import javafx.scene.layout.VBox;
  */
 public class ClientV20 extends Application {
     
-    private Stage primaryStage;
-    private VBox chatLayout;
     
     public static Socket clientSock;
     
@@ -88,7 +88,7 @@ public class ClientV20 extends Application {
             BufferedReader receiveRead=new BufferedReader(new InputStreamReader(istream));
             System.out.println("to Start the chat, type message and press Enter key");
             
-           // Main_InterfaceController.recMessage.appendText("to Start the chat, type message and press Enter key\n");
+           //recMessage.appendText("to Start the chat, type message and press Enter key\n");
          
             String receiveMessage ;    
             while(true)
@@ -100,7 +100,7 @@ public class ClientV20 extends Application {
                    // System.out.println("server:>"+receiveMessage);//displaying message
                    
                     
-                   // Main_InterfaceController.recMessage.appendText("server:>"+(text)+"\n");
+                   //recMessage.appendText("server:>"+(text)+"\n");
                 }          
             }
         }catch(Exception e){
