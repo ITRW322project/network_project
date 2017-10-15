@@ -6,6 +6,7 @@
 package clientv2.pkg0;
 
 import com.jfoenix.controls.JFXTextArea;
+import com.jfoenix.controls.JFXTextField;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -22,6 +23,9 @@ import javafx.scene.Scene;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
 import javafx.scene.control.TextField;
 
 import org.apache.commons.codec.binary.Base64;
@@ -33,11 +37,15 @@ import org.apache.commons.codec.binary.Base64;
 public class Main_InterfaceController implements Initializable {
     
     @FXML 
-    public static TextField messageToSend;
+    public static JFXTextField messageToSend;
     @FXML
     public static JFXTextArea recMessage;
     
     public static String imageString;
+    
+    private ObjectInputStream input;
+    private ObjectOutputStream output;
+    private Socket socket;
     
     StringBuffer  toHide; //initialize the string buffer to encrypt   
     Random random1;

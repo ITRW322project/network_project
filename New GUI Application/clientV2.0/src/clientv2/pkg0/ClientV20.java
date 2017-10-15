@@ -27,11 +27,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
 /**
  *
  * @author beste
  */
 public class ClientV20 extends Application {
+    
+    private Stage primaryStage;
+    private VBox chatLayout;
     
     public static Socket clientSock;
     
@@ -41,20 +45,21 @@ public class ClientV20 extends Application {
     static int publicKey;
     
     @Override
-    public void start(Stage stage) throws Exception {
-       Parent root = FXMLLoader.load(getClass().getResource("Main_Interface.fxml"));
+    public void start(Stage primaryStage) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("Main_Interface.fxml"));
         Scene scene = new Scene(root);
         
-        try {
-            clientSock = new Socket("169.1.39.136", 16000);
+        /*try 
+        {
+           clientSock = new Socket("169.1.39.136", 16000);
            //TaChat.append("Client connected to server\n");
            listenings listenings = new listenings();
         } catch (IOException ex) {
             Logger.getLogger(client_gui.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+        } */
         
-        stage.setScene(scene);
-        stage.show();
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
 
     /**

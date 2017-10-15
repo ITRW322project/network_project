@@ -18,14 +18,17 @@
             <Font size="33.0" />
          </font>
       </Label>
-      <Label layoutX="35.0" layoutY="192.0" text="Email:" />
-      <Label layoutX="35.0" layoutY="246.0" text="Password:" />
-      <TextField fx:id="txtEmail" layoutX="35.0" layoutY="215.0" prefHeight="25.0" prefWidth="219.0" promptText="Please enter email..." />
-      <TextField fx:id="txtPassword" layoutX="35.0" layoutY="271.0" prefHeight="25.0" prefWidth="219.0" promptText="Please enter password..." />
-      <ImageView fx:id="imgLogo" fitHeight="125" fitWidth="125" layoutX="81" layoutY="6" pickOnBounds="true" preserveRatio="true">
+      <JFXTextField fx:id="txtEmail" layoutX="35.0" layoutY="215.0" prefHeight="25.0" prefWidth="219.0" promptText="Please enter email..." />
+      <ImageView fx:id="imgLogo" fitHeight="148.0" fitWidth="147.0" layoutX="68.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../Images/322_Logo.jpg" />
          </image>
       </ImageView>
+      <JFXButton layoutX="36.0" layoutY="331.0" prefHeight="39.0" prefWidth="219.0" style="-fx-background-color: #6e89da;" text="Log In">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </JFXButton>
+      <JFXPasswordField fx:id="txtPassword" layoutX="36.0" layoutY="265.0" prefHeight="25.0" prefWidth="219.0" promptText="Please enter password..." />
    </children>
 </AnchorPane>
