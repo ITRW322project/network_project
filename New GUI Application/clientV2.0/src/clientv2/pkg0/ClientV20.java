@@ -49,14 +49,14 @@ public class ClientV20 extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("Main_Interface.fxml"));
         Scene scene = new Scene(root);
         
-        /*try 
+        try 
         {
            clientSock = new Socket("169.1.39.136", 16000);
            //TaChat.append("Client connected to server\n");
            listenings listenings = new listenings();
         } catch (IOException ex) {
             Logger.getLogger(client_gui.class.getName()).log(Level.SEVERE, null, ex);
-        } */
+        } 
         
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -87,16 +87,20 @@ public class ClientV20 extends Application {
             //receiving from server(receiveRead object)
             BufferedReader receiveRead=new BufferedReader(new InputStreamReader(istream));
             System.out.println("to Start the chat, type message and press Enter key");
-            Main_InterfaceController.recMessage.appendText("to Start the chat, type message and press Enter key\n");
+            
+           // Main_InterfaceController.recMessage.appendText("to Start the chat, type message and press Enter key\n");
          
             String receiveMessage ;    
             while(true)
             {          
                 if((receiveMessage=receiveRead.readLine())!=null)//receive from server
                 {
-                    System.out.println("server:>"+receiveMessage);//displaying message
                     String text = Main_InterfaceController.Decrypt(receiveMessage);
-                    Main_InterfaceController.recMessage.appendText("server:>"+(text)+"\n");
+                    System.out.println("server:>"+(text)+"\n");
+                   // System.out.println("server:>"+receiveMessage);//displaying message
+                   
+                    
+                   // Main_InterfaceController.recMessage.appendText("server:>"+(text)+"\n");
                 }          
             }
         }catch(Exception e){

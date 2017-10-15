@@ -15,7 +15,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="397.0" prefWidth="556.0" style="-fx-background-color: #d3d3e8;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientv2.pkg0.Main_InterfaceController">
    <children>
-      <JFXTextField layoutX="6.0" layoutY="357.0" prefHeight="34.0" prefWidth="431.0" style="-fx-background-color: #ffffff;" unFocusColor="#6b6a86" />
+      <JFXTextField fx:id="messageToSend" layoutX="6.0" layoutY="357.0" prefHeight="34.0" prefWidth="431.0" style="-fx-background-color: #ffffff;" unFocusColor="#6b6a86" />
       <JFXButton fx:id="btnSend" buttonType="RAISED" defaultButton="true" layoutX="446.0" layoutY="357.0" mnemonicParsing="false" onAction="#handleButtonActionMain" prefHeight="34.0" prefWidth="103.0" ripplerFill="#4659b8" style="-fx-background-color: #6e89da;" text="Send" textAlignment="CENTER" textOverrun="CLIP">
          <font>
             <Font size="14.0" />

@@ -32,7 +32,7 @@ import javax.swing.JOptionPane;
  *
  * @author beste
  */
-public class ContactsController implements Initializable {
+public class ContactsController  implements Initializable {
 
     /**
      * Initializes the controller class.
@@ -68,8 +68,10 @@ public class ContactsController implements Initializable {
         System.out.println("Send message to that person");
     }
     
-    private void handleButtonAction(javafx.event.ActionEvent event) {
-        try{
+    /*private void handleButtonAction(javafx.event.ActionEvent event) 
+    {
+        try
+        {
             OutputStream ostream = ClientV20.clientSock.getOutputStream();
             String sendMessage;
             String formattedtext;
@@ -90,12 +92,14 @@ public class ContactsController implements Initializable {
             pwrite.println(formattedtext);
             recMessage.appendText("me:>"+sendMessage+"\n");
             System.out.flush();
+            
         }catch(IOException e){
 
         }     
-    }
+    }*/
     
-    public String Encrypt(String text){
+    public String Encrypt(String text)
+    {
         this.random1 = new Random((privateKey)); //Takes the private key as a seed and generate a new random number.
         publicKey = random1.nextInt(privateKey); //The public key is then created with the random number
         System.out.println("public key is:" +publicKey);   
