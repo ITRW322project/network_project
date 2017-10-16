@@ -18,6 +18,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.Window;
@@ -28,8 +29,11 @@ import javafx.stage.Window;
  * @author beste
  */
 public class Sign_UpController implements Initializable {
-    @FXML private JFXTextField txtEmail;
-    @FXML private JFXTextField txtPassword;
+    @FXML private TextField txtEmail;
+    @FXML private TextField txtPassword;
+    
+    @FXML
+    private ImageView imgLogo;
     /**
      * Initializes the controller class.
      */
@@ -38,14 +42,27 @@ public class Sign_UpController implements Initializable {
         // TODO
     }   
     
+    @FXML
     private Button btnSignUp; 
+    
     @FXML
     private void buttonSignUpEvent(ActionEvent event) throws IOException{
+        String email = txtEmail.getText();
+        String password = txtPassword.getText();
+        
         EmailController eC = new EmailController();
-        eC.Sign_Up("besterjennifer5@gmail.com"  /*txtEmail.getText()*/, "skaapbouter" /*txtPassword.getText()*/);
+        eC.email = email;
+        eC.password = password;
         
-        
-        ((Node)(event.getSource())).getScene().getWindow().hide();  
-        eC.i = "signed_In";
+        Stage stage = new Stage(); 
+            Parent root = null;
+
+            root = FXMLLoader.load(getClass().getResource("Email.fxml"));
+
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+            
+        ((Node)(event.getSource())).getScene().getWindow().hide();
     }
 }

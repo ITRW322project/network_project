@@ -34,6 +34,8 @@ import javafx.scene.input.MouseEvent;
 public class ClientV20 extends Application {
     
     public static Socket clientSock;
+    public String username, password;
+    public int i = 0;
     
     StringBuffer  toHide; //initialize the string buffer to encrypt   
     Random random1;
@@ -82,7 +84,7 @@ public class ClientV20 extends Application {
             //receiving from server(receiveRead object)
             BufferedReader receiveRead=new BufferedReader(new InputStreamReader(istream));
             System.out.println("to Start the chat, type message and press Enter key");
-            Main_InterfaceController.recMessage.appendText("to Start the chat, type message and press Enter key\n");
+            Main_InterfaceController.txtAChatRoom.appendText("to Start the chat, type message and press Enter key\n");
          
             String receiveMessage ;    
             while(true)
@@ -91,7 +93,7 @@ public class ClientV20 extends Application {
                 {
                     System.out.println("server:>"+receiveMessage);//displaying message
                     String text = Main_InterfaceController.Decrypt(receiveMessage);
-                    Main_InterfaceController.recMessage.appendText("server:>"+(text)+"\n");
+                    Main_InterfaceController.txtAChatRoom.appendText("server:>"+(text)+"\n");
                 }          
             }
         }catch(Exception e){
