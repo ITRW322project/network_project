@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.media.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="397.0" prefWidth="556.0" style="-fx-background-color: #d3d3e8;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientv2.pkg0.Main_InterfaceController">
+   <children>
+      <TextField layoutX="7.0" layoutY="357.0" prefHeight="34.0" prefWidth="435.0" />
+      <Button defaultButton="true" layoutX="446.0" layoutY="357.0" mnemonicParsing="false" onAction="#handleButtonActionMain" prefHeight="34.0" prefWidth="103.0" style="-fx-background-color: #bcb1cc;" text="send" textAlignment="CENTER" textOverrun="CLIP" />
+      <TextArea id="TaChat" editable="false" layoutX="4.0" layoutY="56.0" prefHeight="294.0" prefWidth="548.0" />
+      <ImageView fx:id="attachmentImage" fitHeight="34.0" fitWidth="34.0" layoutX="498.0" layoutY="15.0" onMouseClicked="#handleAttachmentAction" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../Images/149827.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="emailImage" fitHeight="30.0" fitWidth="41.0" layoutX="446.0" layoutY="17.0" onMouseClicked="#handleEmailAction" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../Images/78200f2f-c295-4bb1-9cae-48f8422b5aed.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="calendarImage" fitHeight="40.0" fitWidth="41.0" layoutX="402.0" layoutY="12.0" onMouseClicked="#handleCalendarAction" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../Images/calendar.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="61.0" layoutY="2.0" text="Jennifer">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="61.0" layoutY="32.0" text="jennifer@gmail.com" />
+      <ImageView fx:id="imgLogo" fitHeight="51.0" fitWidth="49.0" layoutX="4.0" layoutY="3.0" onMouseClicked="#handleCalendarAction" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../Images/322_Logo.jpg" />
+         </image>
+      </ImageView>
+      <TextArea fx:id="recMessage" layoutX="6.0" layoutY="58.0" prefHeight="289.0" prefWidth="539.0" style="-fx-background-color: #ffffff;" />
+   </children>
+</AnchorPane>

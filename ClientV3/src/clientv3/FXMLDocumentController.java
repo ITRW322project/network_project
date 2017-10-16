@@ -7,9 +7,9 @@ package clientv3;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
-import com.jfoenix.controls.JFXTextArea;
+import com.jfoenix.controls.JFXPasswordField;
+import com.jfoenix.controls.JFXScrollPane;
 import com.jfoenix.controls.JFXTextField;
-import java.awt.Image;
 import java.awt.Label;
 import java.awt.image.BufferedImage;
 import java.io.BufferedOutputStream;
@@ -24,12 +24,8 @@ import java.util.Random;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
@@ -38,14 +34,14 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.nio.file.Files;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
-import javafx.scene.control.TextField;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javax.imageio.ImageIO;
@@ -67,15 +63,17 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private TextFlow recMessages;
     @FXML
-    private JFXTextField txtHostIP;
-    @FXML
     private JFXTextField txtUsername;
     @FXML
-    private JFXTextField txtPassword;
+    private JFXPasswordField txtPassword;
     @FXML
     private JFXTextField messageToSend;
     @FXML
     private JFXListView<String> listUsers;
+    @FXML
+    private AnchorPane rootPane;
+    @FXML
+    private JFXScrollPane sp;
     
     public String imageString;
     
@@ -98,28 +96,49 @@ public class FXMLDocumentController implements Initializable {
     static int privateKey = 123456789;     //This is a private key generated from the user's number
     static int publicKey;
     
-//    public void login() {
-//		port = 16000;
-//		server = "169.1.39.136";
-//		System.out.println(server);
-//		username = txtUsername.getText();
-//		// test if we can start the connection to the Server
-//		// if it failed nothing we can do
-//		if(!start())
-//			return;
-//		connected = true;
-//		btnLogin.setDisable(true);
-//		btnLogout.setDisable(false);
-//		txtUsername.setEditable(false);
-//		txtHostIP.setEditable(false);
-//    }
-    
     @FXML
-    private Label label;
+    private ImageView attachmentImage;
+    @FXML
+    private ImageView emailImage;
+    @FXML
+    private ImageView calendarImage;
+    @FXML
+    private javafx.scene.control.Label lblUsers;
+    @FXML
+    private javafx.scene.control.Label lblPassword;
     
     @FXML
     private void handleButtonAction(ActionEvent event) {
-        
+        try{
+            OutputStream ostream = ClientV3.clientSock.getOutputStream();
+            String sendMessage;
+            String formattedtext;
+            String encryptedM;
+            PrintWriter pwrite=new PrintWriter(ostream,true);
+            sendMessage = messageToSend.getText();
+            
+            String[] tempS = {String.format("me:> "+sendMessage)};
+            Text sendingText = new Text(tempS[0]);
+            
+            String adress = String.valueOf(JOptionPane.showInputDialog(null,"Who do u want to send the message to"));
+            encryptedM = Encrypt(sendMessage);
+            formattedtext="T#"+adress+"#"+(encryptedM);
+            
+            //sending to server
+            OutputStream os = ClientV3.clientSock.getOutputStream();
+            OutputStreamWriter osw = new OutputStreamWriter(os);
+            BufferedWriter bw = new BufferedWriter(osw);
+            bw.write(formattedtext);
+            bw.flush();
+            
+            pwrite.println(formattedtext);
+            System.out.println("me:>"+sendMessage+"\n");
+            recMessages.getChildren().add(sendingText);
+            System.out.flush();
+        }catch(IOException e)
+        {
+            
+        }
     }
     @FXML
     public void handleAttachmentAction(MouseEvent event) throws FileNotFoundException, IOException{
@@ -129,16 +148,20 @@ public class FXMLDocumentController implements Initializable {
         FileChooser.ExtensionFilter extFilterMP3 = new FileChooser.ExtensionFilter("MP3 files (*.mp3)", "*.MP3");
         fc.getExtensionFilters().addAll(extFilterJPG, extFilterMP4, extFilterMP3);
         
-        
-        
         File selectedFile = fc.showOpenDialog(null);
         
         String sF= selectedFile.getName();
         String extension = sF.substring(sF.lastIndexOf(".") + 1, sF.length());
+        
+        //Send Image File
         if(extension.equals("jpg"))
         {
             ImageView selectedI = new ImageView();
-         try {
+            selectedI.setFitHeight(150);
+            selectedI.setFitWidth(200);
+            selectedI.setPreserveRatio(true);
+            
+            try {
                 BufferedImage bufferedImage = ImageIO.read(selectedFile);
                 WritableImage image = SwingFXUtils.toFXImage(bufferedImage, null);
                 selectedI.setImage(image);
@@ -202,6 +225,8 @@ public class FXMLDocumentController implements Initializable {
            }     
         }
         
+        
+        //Send video file
         else if(extension.equals("mp4"))
         {
             InputStream is = socket.getInputStream();
@@ -232,8 +257,10 @@ public class FXMLDocumentController implements Initializable {
         
     }
     @FXML
-    private void handleEmailAction(MouseEvent event){
-       
+    private void handleEmailAction(MouseEvent event) throws IOException{
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("EmailFXML.fxml"));
+        
+        rootPane.getChildren().setAll(pane);
     }
     
     @FXML

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id= "rootPane" id="AnchorPane" prefHeight="472.0" prefWidth="675.0" style="-fx-background-color: #6284e4;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientv3.EmailFXMLController">
+   <children>
+      <SplitPane dividerPositions="0.1306532663316583" orientation="VERTICAL" prefHeight="472.0" prefWidth="675.0" style="-fx-background-color: #9aa2b7;">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                  <Label layoutX="308.0" layoutY="12.0" text="Email">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <JFXButton fx:id="btnBack" buttonType="RAISED" layoutX="14.0" layoutY="17.0" onAction="#handleBackButtonAction" style="-fx-background-color: #6284e4;" text="Back" />
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                  <SplitPane dividerPositions="0.18811881188118812" orientation="VERTICAL" prefHeight="406.0" prefWidth="673.0">
+                    <items>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="77.0" prefWidth="671.0">
+                           <children>
+                              <JFXTextField fx:id="txtEmailAddress" layoutY="-2.0" prefHeight="35.0" prefWidth="671.0" text="TO:" />
+                              <JFXTextField fx:id="txtEmailSub" layoutY="36.0" prefHeight="35.0" prefWidth="671.0" text="SUBJECT:" />
+                           </children>
+                        </AnchorPane>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="330.0" prefWidth="671.0" style="-fx-background-color: #9aa2b7;">
+                           <children>
+                              <JFXTextArea fx:id="txtEmail" prefHeight="272.0" prefWidth="671.0" promptText="Type email here..." style="-fx-background-color: #ffffff;" />
+                              <JFXButton fx:id="btnSend" buttonType="RAISED" layoutX="513.0" layoutY="278.0" prefHeight="41.0" prefWidth="151.0" style="-fx-background-color: #6284e4;" text="Send">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </JFXButton>
+                           </children>
+                        </AnchorPane>
+                    </items>
+                  </SplitPane>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>

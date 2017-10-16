@@ -13,14 +13,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="472.0" prefWidth="675.0" style="-fx-background-color: #9aa2b7;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientv3.FXMLDocumentController">
+<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="472.0" prefWidth="675.0" style="-fx-background-color: #9aa2b7;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientv3.FXMLDocumentController">
    <children>
-      <JFXTextField fx:id="messageToSend" layoutX="245.0" layoutY="417.0" prefHeight="34.0" prefWidth="303.0" promptText="Type message here..." style="-fx-background-color: #ffffff;" unFocusColor="#6b6a86" />
-      <JFXButton fx:id="btnSend" buttonType="RAISED" defaultButton="true" layoutX="561.0" layoutY="417.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="34.0" prefWidth="103.0" ripplerFill="#4659b8" style="-fx-background-color: #6284e4;" text="Send" textAlignment="CENTER" textOverrun="CLIP">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </JFXButton>
       <ImageView fx:id="attachmentImage" fitHeight="40.0" fitWidth="40.0" layoutX="627.0" layoutY="34.0" onMouseClicked="#handleAttachmentAction" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/149827.png" />
@@ -57,6 +51,24 @@
         </content>
       </TitledPane>
       <Line endX="100.0" layoutX="498.0" layoutY="46.0" rotate="90.0" scaleX="0.42" startX="-100.0" />
-      <TextFlow fx:id="recMessages" layoutX="245.0" layoutY="89.0" lineSpacing="1.5" prefHeight="322.0" prefWidth="419.0" style="-fx-background-color: #ffffff;" />
+      <VBox fx:id="container" layoutX="245.0" layoutY="89.0" prefHeight="369.0" prefWidth="420.0">
+         <children>
+            <JFXScrollPane fx:id="sp" prefHeight="322.0" prefWidth="418.0">
+               <children>
+                  <TextFlow fx:id="recMessages" lineSpacing="10.0" prefHeight="322.0" prefWidth="443.0" style="-fx-background-color: #c9c8d6;" />
+               </children>
+            </JFXScrollPane>
+            <HBox fx:id="hbox1" prefHeight="46.0" prefWidth="418.0">
+               <children>
+                  <JFXTextField fx:id="messageToSend" prefHeight="45.0" prefWidth="303.0" promptText="Type message here..." style="-fx-background-color: #ffffff;" unFocusColor="#111117" />
+                  <JFXButton fx:id="btnSend" defaultButton="true" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="47.0" prefWidth="117.0" ripplerFill="#4659b8" style="-fx-background-color: #6284e4;" text="Send" textAlignment="CENTER" textOverrun="CLIP">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>
