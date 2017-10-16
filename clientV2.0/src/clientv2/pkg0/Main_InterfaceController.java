@@ -6,6 +6,7 @@
 package clientv2.pkg0;
 
 import com.jfoenix.controls.JFXTextArea;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -22,6 +23,9 @@ import javafx.scene.Scene;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.beans.property.ListProperty;
@@ -33,6 +37,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javax.swing.JOptionPane;
 
@@ -131,14 +136,36 @@ public class Main_InterfaceController implements Initializable {
     
     @FXML
     public void handleButtonActionMain(ActionEvent event) throws IOException {
-        Stage stage = new Stage(); 
-        Parent root;
+        try{
+            OutputStream ostream = ClientV20.clientSock.getOutputStream();
+            String sendMessage;
+            String formattedtext;
+            String encryptedM;
+            PrintWriter pwrite=new PrintWriter(ostream,true);
+            sendMessage = txtEnterMessage.getText();
             
-        root = FXMLLoader.load(getClass().getResource("Contacts.fxml"));
-        
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+            String[] tempS = {String.format("me:> "+sendMessage)};
+            Text sendingText = new Text(tempS[0]);
+            
+            String adress = String.valueOf(JOptionPane.showInputDialog(null,"Who do u want to send the message to"));
+            encryptedM = Encrypt(sendMessage);
+            formattedtext="T#"+adress+"#"+(encryptedM);
+            
+            //sending to server
+            OutputStream os = ClientV20.clientSock.getOutputStream();
+            OutputStreamWriter osw = new OutputStreamWriter(os);
+            BufferedWriter bw = new BufferedWriter(osw);
+            bw.write(formattedtext);
+            bw.flush();
+            
+            pwrite.println(formattedtext);
+            System.out.println("me:>"+sendMessage+"\n");
+            recMessages.getChildren().add(sendingText);
+            System.out.flush();
+        }catch(IOException e)
+        {
+            
+        }
     }
     
     @FXML
@@ -211,6 +238,25 @@ public class Main_InterfaceController implements Initializable {
         System.out.println("After decryption: " + " " + unhide);
         String hiden = String.valueOf(unhide);
         return hiden;
+    }
+     
+     public String Encrypt(String text){
+        this.random1 = new Random((privateKey)); //Takes the private key as a seed and generate a new random number.
+        publicKey = random1.nextInt(privateKey); //The public key is then created with the random number
+        System.out.println("public key is:" +publicKey);   
+        this.toHide  = new StringBuffer(text); //could have input  for original
+        System.out.println("original"+ "  "+toHide);
+        for (int i = 0; i<toHide.length(); i++)
+        {
+            int temp = 0;
+            temp = (int) toHide.charAt(i);
+            temp = (temp +  publicKey); //scrambles the string with the public key
+            toHide.setCharAt(i, (char)temp); //overwrites the original message
+        }
+        System.out.println("encrypted" +"  " + toHide);
+        String hide =String.valueOf(toHide);
+        System.out.println("encrypted" +"  " + hide);
+        return hide;       
     }
      
      @FXML

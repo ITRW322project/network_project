@@ -6,8 +6,6 @@
 package clientv2.pkg0;
 
 //Connect to the servre imports
-import static clientv2.pkg0.client_gui.TaChat;
-import static clientv2.pkg0.client_gui.clientSock;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -52,7 +50,6 @@ public class ClientV20 extends Application {
            //TaChat.append("Client connected to server\n");
            listenings listenings = new listenings();
         } catch (IOException ex) {
-            Logger.getLogger(client_gui.class.getName()).log(Level.SEVERE, null, ex);
         } 
         
         stage.setScene(scene);

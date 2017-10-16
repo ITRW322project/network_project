@@ -14,6 +14,7 @@ import java.awt.Label;
 import java.awt.image.BufferedImage;
 import java.io.BufferedOutputStream;
 import java.io.BufferedWriter;
+import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -33,7 +34,10 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.net.InetAddress;
+import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.ObservableList;
@@ -251,11 +255,20 @@ public class FXMLDocumentController implements Initializable {
         
         else if(extension.equals("mp3"))
         {
+            try
+            {
+                Socket obj_Client=new Socket(InetAddress.getByName("169.1.39.136"), 16000);
+                DataInputStream din=new DataInputStream(obj_Client.getInputStream());
+                DataOutputStream dout=new DataOutputStream(obj_Client.getOutput)
+            }catch(UnknownHostException e){
+                System.out.println(e);
+            }catch(IOException e){
+                System.out.println(e);
+            }
             
-        }
-        
-        
+        }  
     }
+    
     @FXML
     private void handleEmailAction(MouseEvent event) throws IOException{
         AnchorPane pane = FXMLLoader.load(getClass().getResource("EmailFXML.fxml"));
