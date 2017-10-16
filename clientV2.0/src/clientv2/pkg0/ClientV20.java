@@ -19,12 +19,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import java.util.Random;
+import java.util.Scanner;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 /**
  *
  * @author beste
@@ -63,15 +65,19 @@ public class ClientV20 extends Application {
         launch(args);
     }
     
-    class listenings implements Runnable{
+    public class listenings implements Runnable{
     Thread runner;
+    String receiveText;
+    String[] chatArr;
+    Text messageText;
+    
+    Main_InterfaceController main = new Main_InterfaceController();
+    
     listenings(){
         if(runner == null){
             runner = new Thread(this);
             runner.start();
         }
-        
-        
     }
      
     public void run(){
@@ -80,23 +86,27 @@ public class ClientV20 extends Application {
             InputStream istream=clientSock.getInputStream();
             //receiving from server(receiveRead object)
             BufferedReader receiveRead=new BufferedReader(new InputStreamReader(istream));
+            receiveText = receiveRead.readLine();
+            System.out.println(receiveText);
+//            chatArr[0] = receiveText;
+//            messageText = new Text(chatArr[0]);
             System.out.println("to Start the chat, type message and press Enter key");
-            Main_InterfaceController.txtAChatRoom.appendText("to Start the chat, type message and press Enter key\n");
-         
-            String receiveMessage ;    
+            main.DisplayMessages(messageText); //appendText("to Start the chat, type message and press Enter key\n");
             while(true)
             {          
-                if((receiveMessage=receiveRead.readLine())!=null)//receive from server
+                if((receiveText=receiveRead.readLine())!=null)//receive from server
                 {
-                    System.out.println("server:>"+receiveMessage);//displaying message
-                    String text = Main_InterfaceController.Decrypt(receiveMessage);
-                    Main_InterfaceController.txtAChatRoom.appendText("server:>"+(text)+"\n");
+                    System.out.println("server:>"+receiveText);//displaying message
+                    String text = Main_InterfaceController.Decrypt(receiveText);
+                    
+                    chatArr[0] = text;
+                    messageText = new Text(chatArr[0]);
+                    main.DisplayMessages(messageText); //appendText("server:>"+(text)+"\n");
                 }          
             }
         }catch(Exception e){
-            
+            System.out.println(e);
         }  
     } 
 }
-    
 }

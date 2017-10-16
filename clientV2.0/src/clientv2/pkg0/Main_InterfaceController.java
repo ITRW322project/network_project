@@ -5,11 +5,18 @@
  */
 package clientv2.pkg0;
 
+import static clientv2.pkg0.ClientV20.clientSock;
 import com.jfoenix.controls.JFXTextArea;
+import java.awt.image.BufferedImage;
+import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import javafx.scene.input.MouseEvent;
 import java.net.URL;
 import java.util.Random;
@@ -23,22 +30,32 @@ import javafx.scene.Scene;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.net.InetAddress;
+import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
+import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
 import org.apache.commons.codec.binary.Base64;
@@ -72,8 +89,6 @@ public class Main_InterfaceController implements Initializable {
     private TextField txtEnterMessage;
     @FXML
     private Button btnSend;
-    @FXML
-    public static TextArea txtAChatRoom;
     @FXML
     private TextField txtUsername;
     @FXML
@@ -160,7 +175,7 @@ public class Main_InterfaceController implements Initializable {
             
             pwrite.println(formattedtext);
             System.out.println("me:>"+sendMessage+"\n");
-            recMessages.getChildren().add(sendingText);
+            txtfChatRoom.getChildren().add(sendingText);
             System.out.flush();
         }catch(IOException e)
         {
@@ -171,26 +186,113 @@ public class Main_InterfaceController implements Initializable {
     @FXML
     public void handleAttachmentAction(MouseEvent event) throws FileNotFoundException, IOException {
         FileChooser fc = new FileChooser();
+        FileChooser.ExtensionFilter extFilterJPG = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG");
+        FileChooser.ExtensionFilter extFilterMP4 = new FileChooser.ExtensionFilter("MP4 files (*.mp4)", "*.MP4");
+        FileChooser.ExtensionFilter extFilterMP3 = new FileChooser.ExtensionFilter("MP3 files (*.mp3)", "*.MP3");
+        fc.getExtensionFilters().addAll(extFilterJPG, extFilterMP4, extFilterMP3);
+        
         File selectedFile = fc.showOpenDialog(null);
         
-        if(selectedFile != null){
-            System.out.println(selectedFile.getName());
-        } else {
-            System.out.println("File not valid");
+        String sF= selectedFile.getName();
+        String extension = sF.substring(sF.lastIndexOf(".") + 1, sF.length());
+        
+        //Send Image File
+        if(extension.equals("jpg"))
+        {
+            ImageView selectedI = new ImageView();
+            selectedI.setFitHeight(150);
+            selectedI.setFitWidth(200);
+            selectedI.setPreserveRatio(true);
+            
+            try {
+                BufferedImage bufferedImage = ImageIO.read(selectedFile);
+                WritableImage image = SwingFXUtils.toFXImage(bufferedImage, null);
+                selectedI.setImage(image);
+            } catch (IOException ex) {
+            }
+         
+            if(selectedFile != null){
+               System.out.println(selectedFile.getName());
+           } else {
+               System.out.println("File not valid");
+           }
+
+           try
+           {
+               FileInputStream fis = new FileInputStream(selectedFile);
+               byte byteArray[] = new byte[(int)selectedFile.length()];
+               fis.read(byteArray);
+               imageString = Base64.encodeBase64String(byteArray);
+
+
+               System.out.print(imageString);
+               txtEnterMessage.appendText(imageString);
+           }catch(NullPointerException e)
+           {
+               System.out.print(e);
+           } catch (FileNotFoundException ex) {
+               Logger.getLogger(Main_InterfaceController.class.getName()).log(Level.SEVERE, null, ex);
+           } catch (IOException ex) {
+               Logger.getLogger(Main_InterfaceController.class.getName()).log(Level.SEVERE, null, ex);
+           }
+
+           try
+           {
+               OutputStream ostream = ClientV20.clientSock.getOutputStream();
+               String sendMessage;
+               String formattedtext;
+               String encryptedM;
+
+               PrintWriter pwrite=new PrintWriter(ostream,true);
+               sendMessage = txtEnterMessage.getText();
+
+               String adress = String.valueOf(JOptionPane.showInputDialog(null,"Who do u want to send the message to"));
+               encryptedM = Encrypt(sendMessage);
+               formattedtext="T#"+adress+"#"+(encryptedM);
+
+               //sending to server
+               OutputStream os = ClientV20.clientSock.getOutputStream();
+               OutputStreamWriter osw = new OutputStreamWriter(os);
+               BufferedWriter bw = new BufferedWriter(osw);
+               bw.write(formattedtext);
+               bw.flush();
+
+               pwrite.println(formattedtext);
+               txtfChatRoom.getChildren().add(selectedI);
+               System.out.flush();
+           }catch(IOException e){
+
+           }     
         }
         
-        try
+        
+        //Send video file
+        else if(extension.equals("mp4"))
         {
-            FileInputStream fis = new FileInputStream(selectedFile);
-            byte byteArray[] = new byte[(int)selectedFile.length()];
-            fis.read(byteArray);
-            imageString = Base64.encodeBase64String(byteArray);
+//            InputStream is = socket.getInputStream();
+//            selectedFile.createNewFile();
+//            FileOutputStream fos = new FileOutputStream(selectedFile);
+//            BufferedOutputStream out = new BufferedOutputStream(fos);
+//            byteread = is.read(buffer, 0, buffer.length);
+//            current = byteread;
+//            
+//            while ((byteread = is.read(buffer, 0, buffer.length)) != -1) 
+//            {
+//                out.write(buffer, 0, byteread);
+//            }
+//            out.write(buffer, 0, current);
+//            out.flush();
+//
+//            socket.close();
+//            fos.close();
+//            is.close();
 
-            System.out.print(imageString);
-        }catch(NullPointerException e)
-        {
-            System.out.print(e);
         }
+        
+        else if(extension.equals("mp3"))
+        {
+            
+        }  
     }
     
     @FXML
@@ -261,20 +363,11 @@ public class Main_InterfaceController implements Initializable {
      
      @FXML
     private void handleLoginAction(ActionEvent event) {
-        String username = txtUsername.getText();
-        String password = txtPassword.getText();
-        userExists(username,password);
-            
+        new login();
     }
     
-    public void userExists(String user, String pass)
+    public void userExists()
     {
-        //set u to each username in database when comparing and p to each password.
-        //Trust me it doesn't work unless you do the above as such
-        String u = "Jennifer";
-        String p = "itrw322";
-       if(u.equals(user) && p.equals(pass))  
-        {
             attachmentImage.setDisable(false);
             emailImage.setDisable(false); 
             calendarImage.setDisable(false); 
@@ -295,45 +388,66 @@ public class Main_InterfaceController implements Initializable {
             lblLPassword.setVisible(false);
             lblOpponentUser.setVisible(true);
             lvContacts.setVisible(true);
-        }    
-        else
-            JOptionPane.showMessageDialog(null, "Username or Password is incorrect", "Invalid Credentials", JOptionPane.WARNING_MESSAGE);   
     }
-     
     
-//    class listenings implements Runnable{
-//        Thread runner;
-//        listenings(){
-//            if(runner == null){
-//                runner = new Thread(this);
-//                runner.start();
-//            }
-//        }
-//     
-//        public void run(){
-//            try{   
-//                // Communication stream assosiated with socket      
-//                InputStream istream=ClientV20.clientSock.getInputStream();
-//                //receiving from server(receiveRead object)
-//                BufferedReader receiveRead=new BufferedReader(new InputStreamReader(istream));
-//                System.out.println("to Start the chat, type message and press Enter key");
-//                TaChat.appendText("to Start the chat, type message and press Enter key\n");
-//
-//                String receiveMessage ;    
-//                while(true)
-//                {          
-//                    if((receiveMessage=receiveRead.readLine())!=null)//receive from server
-//                    {
-//                        System.out.println("server:>"+receiveMessage);//displaying message
-//                        String text = Decrypt(receiveMessage);
-//                        TaChat.appendText("server:>"+(text)+"\n");
-//                    }          
-//                }
-//            }catch(Exception e){
-//
-//            }  
-//        }
-//    }
-
+    public void DisplayMessages(Text message)
+    {
+        txtfChatRoom.getChildren().add(message);
+    }
+    
+    public class login implements Runnable{
+    Thread runner;
+    String username = txtUsername.getText();
+    String password = txtPassword.getText();
+    String receiveMessage;
+    boolean flag = false;
+    //Constructor
+    public login(){
+        if(runner == null){
+            runner = new Thread(this);
+            runner.start();
+        }
+    }
+    
+    public void run(){
+        try
+        {   
+            //Communication stream assosiated with socket      
+            InputStream istream = clientSock.getInputStream();
+            OutputStream ostream = clientSock.getOutputStream();                   
+            PrintWriter pwrite = new PrintWriter(ostream,true);               
+            while(true)
+            {    
+                //receiving from server(receiveRead object)
+                BufferedReader receiveRead = new BufferedReader(new InputStreamReader(istream));
+                System.out.println("Login thread running");
+                //client_gui.TaChat.append("to Start the chat, type message and press Enter key\n");
+               // receiveMessage = receiveRead.readLine();                              
+                while(flag == false)
+                {                  
+                    //send to the server for validation
+                    
+                    String sendMessage = "L#" + username + "#" + password;                
+                    pwrite.println(sendMessage);
+                    receiveMessage = receiveRead.readLine();
+                    if(receiveMessage.contentEquals("false"))//receive from server
+                    {
+                        JOptionPane.showMessageDialog(null, "Username or Password is incorrect", "Invalid Credentials", JOptionPane.WARNING_MESSAGE);                        
+                        runner.stop();
+                        
+                    }else{
+                        
+                        flag = true;
+                        System.out.println(receiveMessage);
+                        userExists();
+                        runner.stop();
+                    }
+                }
+            }
+        }catch(Exception e){
+            
+        }  
+    }   
+}
     
 }
