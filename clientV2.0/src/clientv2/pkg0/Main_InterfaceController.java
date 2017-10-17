@@ -70,6 +70,8 @@ import org.apache.commons.codec.binary.Base64;
 public class Main_InterfaceController implements Initializable {
     
     public static String imageString;
+    public String email;
+    public String password;
     
     StringBuffer  toHide; //initialize the string buffer to encrypt   
     Random random1;
@@ -318,30 +320,15 @@ public class Main_InterfaceController implements Initializable {
     
     @FXML
     private void handleEmailAction(MouseEvent event) throws IOException{
-        
-        if(client.i == 0)
-        {
-            Stage stage = new Stage(); 
-            Parent root = null;
+        Stage stage = new Stage(); 
+        Parent root = null;
 
-            root = FXMLLoader.load(getClass().getResource("Sign_Up.fxml"));
+        root = FXMLLoader.load(getClass().getResource("Email.fxml"));
 
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            client.i = 1;
-            stage.show(); 
-        }
-        else
-        {
-            Stage stage = new Stage(); 
-            Parent root = null;
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
 
-            root = FXMLLoader.load(getClass().getResource("Email.fxml"));
-
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        }
     }
     
     @FXML

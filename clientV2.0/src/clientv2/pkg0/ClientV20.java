@@ -34,7 +34,7 @@ import javafx.scene.text.Text;
 public class ClientV20 extends Application {
     
     public static Socket clientSock;
-    public String username, password;
+    public String email, password;
     public int i = 0;
     
     StringBuffer  toHide; //initialize the string buffer to encrypt   
