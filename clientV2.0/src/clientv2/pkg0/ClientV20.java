@@ -50,7 +50,7 @@ public class ClientV20 extends Application {
         try {
             clientSock = new Socket("169.1.39.136", 16000);
            //TaChat.append("Client connected to server\n");
-           listenings listenings = new listenings();
+           //listenings listenings = new listenings();
         } catch (IOException ex) {
         } 
         
@@ -65,48 +65,5 @@ public class ClientV20 extends Application {
         launch(args);
     }
     
-    public class listenings implements Runnable{
-    Thread runner;
-    String receiveText;
-    String[] chatArr;
-    Text messageText;
     
-    Main_InterfaceController main = new Main_InterfaceController();
-    
-    listenings(){
-        if(runner == null){
-            runner = new Thread(this);
-            runner.start();
-        }
-    }
-     
-    public void run(){
-        try{   
-            // Communication stream assosiated with socket      
-            InputStream istream=clientSock.getInputStream();
-            //receiving from server(receiveRead object)
-            BufferedReader receiveRead=new BufferedReader(new InputStreamReader(istream));
-            receiveText = receiveRead.readLine();
-            System.out.println(receiveText);
-//            chatArr[0] = receiveText;
-//            messageText = new Text(chatArr[0]);
-            System.out.println("to Start the chat, type message and press Enter key");
-            main.DisplayMessages(messageText); //appendText("to Start the chat, type message and press Enter key\n");
-            while(true)
-            {          
-                if((receiveText=receiveRead.readLine())!=null)//receive from server
-                {
-                    System.out.println("server:>"+receiveText);//displaying message
-                    String text = Main_InterfaceController.Decrypt(receiveText);
-                    
-                    chatArr[0] = text;
-                    messageText = new Text(chatArr[0]);
-                    main.DisplayMessages(messageText); //appendText("server:>"+(text)+"\n");
-                }          
-            }
-        }catch(Exception e){
-            System.out.println(e);
-        }  
-    } 
-}
 }

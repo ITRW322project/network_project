@@ -35,11 +35,13 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
+import static java.util.concurrent.ThreadLocalRandom.current;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.property.ListProperty;
@@ -57,6 +59,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
+import static jdk.nashorn.internal.objects.ArrayBufferView.buffer;
 
 import org.apache.commons.codec.binary.Base64;
 
@@ -152,7 +155,7 @@ public class Main_InterfaceController implements Initializable {
     @FXML
     public void handleButtonActionMain(ActionEvent event) throws IOException {
         try{
-            OutputStream ostream = ClientV20.clientSock.getOutputStream();
+            OutputStream ostream = clientSock.getOutputStream();
             String sendMessage;
             String formattedtext;
             String encryptedM;
@@ -167,7 +170,7 @@ public class Main_InterfaceController implements Initializable {
             formattedtext="T#"+adress+"#"+(encryptedM);
             
             //sending to server
-            OutputStream os = ClientV20.clientSock.getOutputStream();
+            OutputStream os = clientSock.getOutputStream();
             OutputStreamWriter osw = new OutputStreamWriter(os);
             BufferedWriter bw = new BufferedWriter(osw);
             bw.write(formattedtext);
@@ -184,7 +187,7 @@ public class Main_InterfaceController implements Initializable {
     }
     
     @FXML
-    public void handleAttachmentAction(MouseEvent event) throws FileNotFoundException, IOException {
+    public void handleAttachmentAction(MouseEvent event) throws FileNotFoundException, IOException, InterruptedException {
         FileChooser fc = new FileChooser();
         FileChooser.ExtensionFilter extFilterJPG = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG");
         FileChooser.ExtensionFilter extFilterMP4 = new FileChooser.ExtensionFilter("MP4 files (*.mp4)", "*.MP4");
@@ -238,7 +241,7 @@ public class Main_InterfaceController implements Initializable {
 
            try
            {
-               OutputStream ostream = ClientV20.clientSock.getOutputStream();
+               OutputStream ostream = clientSock.getOutputStream();
                String sendMessage;
                String formattedtext;
                String encryptedM;
@@ -251,7 +254,7 @@ public class Main_InterfaceController implements Initializable {
                formattedtext="T#"+adress+"#"+(encryptedM);
 
                //sending to server
-               OutputStream os = ClientV20.clientSock.getOutputStream();
+               OutputStream os = clientSock.getOutputStream();
                OutputStreamWriter osw = new OutputStreamWriter(os);
                BufferedWriter bw = new BufferedWriter(osw);
                bw.write(formattedtext);
@@ -266,33 +269,51 @@ public class Main_InterfaceController implements Initializable {
         }
         
         
-        //Send video file
+        //Send video or audio file
+        
         else if(extension.equals("mp4"))
         {
-//            InputStream is = socket.getInputStream();
-//            selectedFile.createNewFile();
-//            FileOutputStream fos = new FileOutputStream(selectedFile);
-//            BufferedOutputStream out = new BufferedOutputStream(fos);
-//            byteread = is.read(buffer, 0, buffer.length);
-//            current = byteread;
-//            
-//            while ((byteread = is.read(buffer, 0, buffer.length)) != -1) 
-//            {
-//                out.write(buffer, 0, byteread);
-//            }
-//            out.write(buffer, 0, current);
-//            out.flush();
-//
-//            socket.close();
-//            fos.close();
-//            is.close();
-
-        }
-        
-        else if(extension.equals("mp3"))
-        {
+            DataOutputStream dout = new DataOutputStream(clientSock.getOutputStream());
+            FileInputStream fin = new FileInputStream(selectedFile);
+            byte[] buffer = new byte[4096];
+		
+            while (fin.read(buffer) > 0) {
+                dout.write(buffer);
+                System.out.println(buffer + " bytes sent");
+                Thread.sleep(50);
+            }
+            dout.close();
+            fin.close();
             
-        }  
+            /*Main_InterfaceController obj = new Main_InterfaceController();   
+            DataInputStream din = new DataInputStream(client.clientSock.getInputStream());
+            DataOutputStream dout = new DataOutputStream(client.clientSock.getOutputStream());
+            byte[] buffer = obj.CreateDataPacket("Video Received".getBytes("UTF8"));
+            dout.write(buffer);
+            System.out.println("obj sent");*/
+        }
+    }
+    
+    private byte[] CreateDataPacket(byte[] data)
+    {
+        byte[] packet = null;
+        try {
+            byte[] initialize = new byte[1];
+            initialize[0] = 2;
+            byte[] seperator = new byte[1];
+            seperator[0] = 4;
+            byte[] data_length = String.valueOf(data.length).getBytes("UTF8");
+            packet = new byte[initialize.length+seperator.length+data_length.length+data.length];
+            
+            System.arraycopy(initialize, 0, packet, 0, initialize.length);
+            System.arraycopy(data_length, 0, packet, initialize.length, data_length.length);
+            System.arraycopy(seperator, 0, packet, initialize.length+data_length.length, seperator.length);
+            System.arraycopy(data, 0, packet, initialize.length+data_length.length+seperator.length, data.length);
+            
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(Main_InterfaceController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return packet;
     }
     
     @FXML
@@ -388,11 +409,8 @@ public class Main_InterfaceController implements Initializable {
             lblLPassword.setVisible(false);
             lblOpponentUser.setVisible(true);
             lvContacts.setVisible(true);
-    }
-    
-    public void DisplayMessages(Text message)
-    {
-        txtfChatRoom.getChildren().add(message);
+            
+            listenings listenings = new listenings();
     }
     
     public class login implements Runnable{
@@ -449,5 +467,48 @@ public class Main_InterfaceController implements Initializable {
         }  
     }   
 }
+    
+    public class listenings implements Runnable{
+        Thread runner;
+        String receiveText;
+        String[] chatArr;
+        Text messageText;
+
+        listenings(){
+            if(runner == null){
+                runner = new Thread(this);
+                runner.start();
+            }
+        }
+
+        public void run(){
+            try{   
+                // Communication stream assosiated with socket      
+                InputStream istream = clientSock.getInputStream();
+                //receiving from server(receiveRead object)
+                BufferedReader receiveRead = new BufferedReader(new InputStreamReader(istream));
+                receiveText = receiveRead.readLine();
+                System.out.println(receiveText);
+                chatArr[0] = receiveText;
+                messageText = new Text(chatArr[0]);
+                System.out.println("to Start the chat, type message and press Enter key");
+                txtfChatRoom.getChildren().add(messageText); //appendText("to Start the chat, type message and press Enter key\n");
+                while(true)
+                {          
+                    if((receiveText=receiveRead.readLine())!=null)//receive from server
+                    {
+                        System.out.println("server:>"+receiveText);//displaying message
+                        String text = Decrypt(receiveText);
+
+                        chatArr[0] = text;
+                        messageText = new Text(chatArr[0]);
+                        txtfChatRoom.getChildren().add(messageText); //appendText("server:>"+(text)+"\n");
+                    }          
+                }
+            }catch(Exception e){
+                System.out.println(e);
+            }  
+        } 
+    }
     
 }
