@@ -51,7 +51,6 @@ public class Sign_UpController implements Initializable {
         String password = txtPassword.getText();
         
         EmailController eC = new EmailController();
-        eC.initializeGlobal(email,password);
         
         Stage stage = new Stage(); 
             Parent root = null;

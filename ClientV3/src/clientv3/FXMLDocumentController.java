@@ -259,7 +259,7 @@ public class FXMLDocumentController implements Initializable {
             {
                 Socket obj_Client=new Socket(InetAddress.getByName("169.1.39.136"), 16000);
                 DataInputStream din=new DataInputStream(obj_Client.getInputStream());
-                DataOutputStream dout=new DataOutputStream(obj_Client.getOutput)
+                //DataOutputStream dout=new DataOutputStream(obj_Client.getOutput)
             }catch(UnknownHostException e){
                 System.out.println(e);
             }catch(IOException e){
