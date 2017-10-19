@@ -1,0 +1,45 @@
+
+
+.button{
+    -fx-background-color: transparent;
+}
+
+/*#btnOpenFile{
+    -fx-background-imag: url("../Images/Open_folder.png");
+    -fx-background-size: 20 20 ;
+    -fx-bacground-repeat: no-repeat;
+    -fx-bacground-position: center;
+    -fx-background-color: transparent;
+}
+
+#btnPlay{
+    -fx-background-imag: url("../Images/play.png");
+    -fx-background-size: 20 20 ;
+    -fx-bacground-repeat: no-repeat;
+    -fx-bacground-position: center;
+    -fx-background-color: transparent;
+}
+
+#btnPause{
+    -fx-background-imag: url("../Images/pause.png");
+    -fx-background-size: 20 20 ;
+    -fx-bacground-repeat: no-repeat;
+    -fx-bacground-position: center;
+    -fx-background-color: transparent;
+}
+
+#btnStop{
+    -fx-background-imag: url("../Images/stop.png");
+    -fx-background-size: 20 20 ;
+    -fx-bacground-repeat: no-repeat;
+    -fx-bacground-position: center;
+    -fx-background-color: transparent;
+}
+
+#btnExit{
+    -fx-background-imag: url("../Images/exit.jpg");
+    -fx-background-size: 20 20 ;
+    -fx-bacground-repeat: no-repeat;
+    -fx-bacground-position: center;
+    -fx-background-color: transparent;
+}*/

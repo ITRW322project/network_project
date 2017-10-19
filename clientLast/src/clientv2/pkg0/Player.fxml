@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.media.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="650.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientv2.pkg0.PlayerController">
+   <center>
+      <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Slider fx:id="seeSlider" StackPane.alignment="BOTTOM_CENTER" />
+            <MediaView fx:id="mediaView" fitHeight="200.0" fitWidth="200.0" />
+         </children>
+      </StackPane>
+   </center>
+   <bottom>
+      <VBox alignment="CENTER" prefHeight="42.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="600.0">
+               <children>
+                  <Button fx:id="btnOpenFile" alignment="CENTER" mnemonicParsing="false" onAction="#onClickOpen" prefHeight="25.0" prefWidth="71.0" text="Open File">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="btnPlay" mnemonicParsing="false" onAction="#onClickPlay" prefHeight="25.0" prefWidth="44.0" text="Play">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="btnPause" mnemonicParsing="false" onAction="#onClickBtnPause" prefHeight="25.0" prefWidth="49.0" text="Pause">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="btnStop" mnemonicParsing="false" onAction="#onClickStop" prefHeight="25.0" prefWidth="42.0" text="Stop">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="btnSlower" mnemonicParsing="false" onAction="#onClickBtnSlower" text="&lt;&lt;&lt;">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="btnSlow" mnemonicParsing="false" onAction="#onClickBtnSlow" text="&lt;&lt;">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="btnFastForward" mnemonicParsing="false" onAction="#onClickFastForward" text="&gt;&gt;">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="btnFastFastForward" mnemonicParsing="false" onAction="#onClickFastFastForward" text="&gt;&gt;&gt;">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="btnExit" mnemonicParsing="false" onAction="#exit" prefHeight="25.0" prefWidth="37.0" text="Exit">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Slider fx:id="slider" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </bottom>
+</BorderPane>

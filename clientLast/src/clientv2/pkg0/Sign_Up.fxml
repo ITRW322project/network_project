@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.paint.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="351.0" prefWidth="286.0" style="-fx-background-color: #d3d3e8;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="clientv2.pkg0.Sign_UpController">
+   <children>
+      <Label layoutX="91.0" layoutY="78.0" text="Sign In">
+         <font>
+            <Font size="33.0" />
+         </font>
+      </Label>
+      <Label layoutX="35.0" layoutY="192.0" text="Email:" />
+      <Label layoutX="35.0" layoutY="246.0" text="Password:" />
+      <TextField fx:id="txtEmail" layoutX="35.0" layoutY="215.0" prefHeight="25.0" prefWidth="219.0" promptText="Please enter email..." />
+      <TextField fx:id="txtPassword" layoutX="35.0" layoutY="271.0" prefHeight="25.0" prefWidth="219.0" promptText="Please enter password..." />
+      <ImageView fx:id="imgLogo" fitHeight="125" fitWidth="125" layoutX="81" layoutY="6" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../Images/322_Logo.jpg" />
+         </image>
+      </ImageView>
+      <Button fx:id="btnSignUp" layoutX="116.0" layoutY="306.0" mnemonicParsing="false" onAction="#buttonSignUpEvent" text="Sign In" />
+      <Label layoutX="114.0" layoutY="146.0" text="Sign In">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
