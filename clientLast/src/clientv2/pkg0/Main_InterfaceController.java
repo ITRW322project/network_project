@@ -5,7 +5,6 @@
  */
 package clientv2.pkg0;
 
-import static clientv2.pkg0.ClientV20.clientSock;
 import com.jfoenix.controls.JFXTextArea;
 import java.awt.image.BufferedImage;
 import java.io.BufferedOutputStream;
@@ -37,18 +36,26 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
 import java.net.Socket;
+import java.net.SocketAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.concurrent.ThreadLocalRandom.current;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.zip.GZIPInputStream;
+import java.util.zip.GZIPOutputStream;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
@@ -58,6 +65,7 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javax.imageio.ImageIO;
+import javax.net.ssl.SSLSocketFactory;
 import javax.swing.JOptionPane;
 import static jdk.nashorn.internal.objects.ArrayBufferView.buffer;
 
@@ -70,6 +78,17 @@ import org.apache.commons.codec.binary.Base64;
 public class Main_InterfaceController implements Initializable {
     
     public static String imageString;
+    
+    //Sockets
+    public static Socket clientSock;
+    public SocketAddress address;
+    public InetSocketAddress inet;
+    public Proxy proxy;
+    public String proxyHost;
+    public int proxyPort;
+    
+    public String username, password;
+    public int z = 0;
     
     StringBuffer  toHide; //initialize the string buffer to encrypt   
     Random random1;
@@ -90,6 +109,10 @@ public class Main_InterfaceController implements Initializable {
     private TextFlow txtfContacts;
     @FXML
     private TextField txtEnterMessage;
+    @FXML
+    private TextField txtProxyHost;
+    @FXML
+    private TextField txtProxyPort;
     @FXML
     private Button btnSend;
     @FXML
@@ -112,12 +135,14 @@ public class Main_InterfaceController implements Initializable {
     private Label lblLPassword;
     @FXML
     private ListView<String> lvContacts;
+    @FXML
+    private CheckBox chkProxy;
     
     //To add contacts
     protected List<String> attachments = new ArrayList<>();
     protected ListProperty<String> listProperty = new SimpleListProperty<>();
     
-    ClientV20 client = new ClientV20();
+    //ClientV20 client = new ClientV20();
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -151,6 +176,61 @@ public class Main_InterfaceController implements Initializable {
         lvContacts.itemsProperty().bind(listProperty);
         listProperty.set(FXCollections.observableArrayList(attachments));
     }  
+    
+    public void ConnectToServer()
+    {
+        if(!chkProxy.isSelected())
+        {
+            try {
+                
+                clientSock = new Socket("169.1.39.136", 16000);
+                
+            } catch (IOException ex) {
+            } 
+        }
+        else
+        {
+            try {
+                
+                proxyHost = txtProxyHost.getText();
+                proxyPort=Integer.parseInt(txtProxyPort.getText());
+                
+                address = new InetSocketAddress(proxyHost, proxyPort);
+                
+                proxy = new Proxy(Proxy.Type.SOCKS, address);
+                
+                clientSock = new Socket(proxy);
+                inet = new InetSocketAddress("169.1.39.136", 16000);
+                clientSock.connect(inet);
+                
+            } catch (IOException ex) {
+                System.out.println(ex);
+                Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("Information Needed Dialog");
+                alert.setHeaderText(null);
+                alert.setContentText("Entered all required information please!/n" + ex);
+
+                alert.showAndWait();
+            } 
+        }
+        
+    }
+    
+    @FXML
+    private void handleEnableProxy()
+    {
+        if(chkProxy.isSelected())
+        {
+            chkProxy.setSelected(true);
+            txtProxyHost.setDisable(false);
+            txtProxyPort.setDisable(false);
+        }else
+        {
+            chkProxy.setSelected(false);
+            txtProxyHost.setDisable(true);
+            txtProxyPort.setDisable(true);
+        }
+    }
     
     @FXML
     public void handleButtonActionMain(ActionEvent event) throws IOException {
@@ -273,6 +353,8 @@ public class Main_InterfaceController implements Initializable {
         
         else if(extension.equals("mp4"))
         {
+            //File compressed = compress(selectedFile, selectedFile.getName());
+            
             DataOutputStream dout = new DataOutputStream(clientSock.getOutputStream());
             FileInputStream fin = new FileInputStream(selectedFile);
             byte[] buffer = new byte[4096];
@@ -331,7 +413,7 @@ public class Main_InterfaceController implements Initializable {
     @FXML
     private void handleEmailAction(MouseEvent event) throws IOException{
         
-        if(client.i == 0)
+        if(z == 0)
         {
             Stage stage = new Stage(); 
             Parent root = null;
@@ -340,7 +422,7 @@ public class Main_InterfaceController implements Initializable {
 
             Scene scene = new Scene(root);
             stage.setScene(scene);
-            client.i = 1;
+            z = 1;
             stage.show(); 
         }
         else
@@ -394,8 +476,49 @@ public class Main_InterfaceController implements Initializable {
         return hide;       
     }
      
+    public static File compress(File source, String name) throws IOException
+    {
+        byte[] buffer = new byte[1024];
+        File output = new File(name);
+	FileInputStream fis = new FileInputStream(source);
+	FileOutputStream fos = new FileOutputStream(output);
+	GZIPOutputStream gzos = new GZIPOutputStream(fos);
+	int read;
+		
+	while((read = fis.read(buffer)) != -1)
+	{
+            gzos.write(buffer, 0, read);
+	}
+		
+	gzos.finish();
+	gzos.close();
+	fos.close();
+	fis.close();
+        
+        return output;
+    }
+     
+    public static void decompress(File source, File destination) throws IOException
+    {
+	byte[] buffer = new byte[1024];
+	FileInputStream fin = new FileInputStream(source);
+	GZIPInputStream gzin = new GZIPInputStream(fin);
+	FileOutputStream fout = new FileOutputStream(destination);
+	int read;
+		
+	while((read = gzin.read(buffer)) != -1)
+	{
+            fout.write(buffer, 0, read);
+	}
+        
+	gzin.close();
+	fout.close();
+	fin.close();
+    }
+     
      @FXML
     private void handleLoginAction(ActionEvent event) {
+        ConnectToServer();
         new login();
     }
     
@@ -421,6 +544,9 @@ public class Main_InterfaceController implements Initializable {
             lblLPassword.setVisible(false);
             lblOpponentUser.setVisible(true);
             lvContacts.setVisible(true);
+            chkProxy.setVisible(false);
+            txtProxyHost.setVisible(false);
+            txtProxyPort.setVisible(false);
             
             //listenings listenings = new listenings();
     }

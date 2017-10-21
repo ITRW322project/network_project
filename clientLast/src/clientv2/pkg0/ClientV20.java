@@ -14,7 +14,10 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
 import java.net.Socket;
+import java.net.SocketAddress;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -28,15 +31,13 @@ import javafx.stage.Stage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javax.net.ssl.SSLSocketFactory;
+import javax.swing.JOptionPane;
 /**
  *
  * @author beste
  */
 public class ClientV20 extends Application {
     
-    public static Socket clientSock;
-    public String username, password;
-    public int i = 0;
     
     StringBuffer  toHide; //initialize the string buffer to encrypt   
     Random random1;
@@ -48,18 +49,11 @@ public class ClientV20 extends Application {
        Parent root = FXMLLoader.load(getClass().getResource("Main_Interface.fxml"));
         Scene scene = new Scene(root);
         
-        try {
-            System.setProperty("javax.net.ssl.trustStore", "C:/Users/Simeon/Desktop/GitHub/network_project/clientLast/src/talkative.key");
-            clientSock = ((SSLSocketFactory)SSLSocketFactory.getDefault()).createSocket("169.1.39.136", 16000);
-           //clientSock = new Socket("169.1.39.136", 16000);
-           //TaChat.append("Client connected to server\n");
-           //listenings listenings = new listenings();
-        } catch (IOException ex) {
-        } 
-        
         stage.setScene(scene);
         stage.show();
     }
+    
+   
 
     /**
      * @param args the command line arguments
