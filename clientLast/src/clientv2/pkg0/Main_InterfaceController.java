@@ -412,21 +412,6 @@ public class Main_InterfaceController implements Initializable {
     
     @FXML
     private void handleEmailAction(MouseEvent event) throws IOException{
-        
-        if(z == 0)
-        {
-            Stage stage = new Stage(); 
-            Parent root = null;
-
-            root = FXMLLoader.load(getClass().getResource("Sign_Up.fxml"));
-
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            z = 1;
-            stage.show(); 
-        }
-        else
-        {
             Stage stage = new Stage(); 
             Parent root = null;
 
@@ -435,7 +420,7 @@ public class Main_InterfaceController implements Initializable {
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
-        }
+
     }
     
     @FXML

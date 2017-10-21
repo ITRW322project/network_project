@@ -5,6 +5,8 @@
  */
 package clientv2.pkg0;
 
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Properties;
@@ -28,6 +30,12 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 /**
  * FXML Controller class
@@ -56,16 +64,34 @@ public class EmailController implements Initializable {
     
     @FXML
     private void handleSendAction(ActionEvent event) throws IOException{
+        JPanel p = new JPanel(new BorderLayout(5,5));
+
+        JPanel labels = new JPanel(new GridLayout(0,1,2,2));
+        labels.add(new JLabel("User Name", SwingConstants.RIGHT));
+        labels.add(new JLabel("Password", SwingConstants.RIGHT));
+        p.add(labels, BorderLayout.WEST);
+
+        JPanel controls = new JPanel(new GridLayout(0,1,2,2));
+        JTextField txtusername = new JTextField("");
+        controls.add(txtusername);
+        JPasswordField txtpassword = new JPasswordField();
+        txtusername.addAncestorListener(new RequestFocusListener(false));
+        controls.add(txtpassword);
+        p.add(controls, BorderLayout.CENTER);
+
+        JOptionPane.showMessageDialog(
+            null, p, "Log In", JOptionPane.QUESTION_MESSAGE);
+        
         String to = txtTo.getText();
         String subject = txtSubject.getText();
         String message = txtMessage.getText();
-        System.out.println("okay " + email);
-        System.out.println(password);
+        System.out.println("okay " + txtusername.getText());
+        System.out.println(txtpassword.getText());
         System.out.println("why" + to);
         System.out.println(subject);
-        System.out.println(to);
+        System.out.println(message);
         
-        sendEmail(to,subject, message, "besterjennifer5@gmail.com", email, password);
+        sendEmail(to,subject, message, txtusername.getText(), txtusername.getText(), txtpassword.getText());
     }
     
     public static void sendEmail(String to, String subject, String msg,
