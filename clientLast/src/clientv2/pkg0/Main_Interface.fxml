@@ -17,17 +17,17 @@
    <children>
       <TextField fx:id="txtEnterMessage" layoutX="206.0" layoutY="355.0" prefHeight="34.0" prefWidth="435.0" promptText="Enter Text Here..." />
       <Button fx:id="btnSend" defaultButton="true" layoutX="642.0" layoutY="355.0" mnemonicParsing="false" onAction="#handleButtonActionMain" prefHeight="34.0" prefWidth="113.0" style="-fx-background-color: #bcb1cc;" text="send" textAlignment="CENTER" textOverrun="CLIP" />
-      <ImageView fx:id="attachmentImage" fitHeight="34.0" fitWidth="34.0" layoutX="700.0" layoutY="15.0" onMouseClicked="#handleAttachmentAction" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="attachmentImage" fitHeight="34.0" fitWidth="34.0" layoutX="676.0" layoutY="15.0" onMouseClicked="#handleAttachmentAction" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../Images/149827.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="emailImage" fitHeight="30.0" fitWidth="41.0" layoutX="650.0" layoutY="17.0" onMouseClicked="#handleEmailAction" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="emailImage" fitHeight="30.0" fitWidth="41.0" layoutX="626.0" layoutY="17.0" onMouseClicked="#handleEmailAction" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../Images/78200f2f-c295-4bb1-9cae-48f8422b5aed.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="calendarImage" fitHeight="40.0" fitWidth="41.0" layoutX="600.0" layoutY="12.0" onMouseClicked="#handleCalendarAction" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="calendarImage" fitHeight="40.0" fitWidth="41.0" layoutX="576.0" layoutY="12.0" onMouseClicked="#handleCalendarAction" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../Images/calendar.png" />
          </image>
@@ -73,9 +73,9 @@
       <TextField fx:id="txtUsername" layoutX="30.0" layoutY="148.0" promptText="username..." />
       <PasswordField fx:id="txtPassword" layoutX="30.0" layoutY="196.0" promptText="password..." />
       <Button fx:id="btnLogin" layoutX="81.0" layoutY="230.0" mnemonicParsing="false" onAction="#handleLoginAction" text="Login" />
-      <ImageView fx:id="videoImage" fitHeight="40.0" fitWidth="40.0" layoutX="550.0" layoutY="12.0" onMouseClicked="#handleVideoAction" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="videoImage" fitHeight="40.0" fitWidth="40.0" layoutX="710.0" layoutY="12.0" onMouseClicked="#handleVideoAction" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../Images/pict--video-record-tv,-photo-and-video---vector-stencils-library.png--diagram-flowchart-example.png" />
+            <Image url="@../../Images/video.png" />
          </image>
       </ImageView>
       <TextField fx:id="txtProxyHost" disable="true" layoutX="30.0" layoutY="304.0" promptText="Host" />
