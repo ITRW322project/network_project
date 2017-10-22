@@ -513,12 +513,40 @@ public class MainFrame extends javax.swing.JFrame{
         PrintWriter writer;
         PrintWriter writer2;
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        String path = FileSystemView.getFileSystemView().getDefaultDirectory().getPath() + "\\Datums\\email\\"+email+"\\LastAppointmentDate.txt";
-        String path2 = FileSystemView.getFileSystemView().getDefaultDirectory().getPath() + "\\Datums\\email\\"+email;
         
-        File dir = new File(path2);
+        String path = FileSystemView.getFileSystemView().getDefaultDirectory().getPath() + "\\Datum\\email\\"+email+"\\LastAppointmentDate.txt";
+        String path2 = FileSystemView.getFileSystemView().getDefaultDirectory().getPath() + "\\Datum\\email\\"+email;
+        String path3 = FileSystemView.getFileSystemView().getDefaultDirectory().getPath() + "\\Datum\\email";
+        String path4 = FileSystemView.getFileSystemView().getDefaultDirectory().getPath() + "\\Datum";
+        
+        
+        File dir = new File(path4);
+        File dir1 = new File(path3);
+         File dir2 = new File(path2);
+        
+        
+        
         if (! dir.exists())
+        {
+            
             dir.mkdir();
+            
+        }
+        
+        if (! dir1.exists())
+        {
+            
+            
+            dir1.mkdir();
+            
+        }
+        
+        if (! dir2.exists())
+        {
+            
+            
+            dir2.mkdir();
+        }
         
         File f = new File(path);
         if(!f.exists())
